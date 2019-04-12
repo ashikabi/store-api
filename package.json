@@ -1,0 +1,28 @@
+{
+  "name": "store-api",
+  "version": "0.0.1",
+  "description": "store-api",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ashikabi/store-api.git"
+  },
+  "keywords": [
+    "store-api"
+  ],
+  "author": "Jose Artiga",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ashikabi/store-api/issues"
+  },
+  "homepage": "https://github.com/ashikabi/store-api#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.5",
+    "express": "^4.16.4",
+    "mongoose": "^5.5.1"
+  }
+}
