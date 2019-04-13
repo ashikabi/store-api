@@ -1,13 +1,13 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+let mongoose = require('mongoose');
+let Schema = mongoose.Schema;
 
 
-var logPriceSchema = new Schema({
+let logPriceSchema = new Schema({
     product: { type: Schema.Types.ObjectId, ref: 'product' },
     old_price: { type: Number,required: true, default: 0 },
     new_price: { type: Number,required: true, default: 0 },
     date: { type : Date, required: true ,default: Date.now },
-    //user: { type: Schema.Types.ObjectId, ref: 'user' },
+    user: { type: Schema.Types.ObjectId, ref: 'user' },
     status: { type: String, required: true, default: 'A' },//D : deleted ; A : active
 });
 
