@@ -3,6 +3,7 @@ const _ = require('underscore');
 let Product = require('../model/product');
 let LogPrice = require('../model/log_product_price');
 let LogPurchase = require('../model/log_purchase');
+let Popularity = require('../model/popularity');
 const { IsValidToken, isAdmin } = require('../controller/authentication');
 
 let app = express();
@@ -40,7 +41,7 @@ app.get('/product/availables', (req, res) => {
     let step = req.query.step || 5;
 
     Product.find({ status: 'A', //D : deleted ; A : active
-                   quantity: {$gt: 0} }) // quantity > 0
+                   quantity: {$gt: 0} }) // quantity > 0 //those are available
             .sort('name')
             .skip(from)
             .limit(step)
@@ -59,6 +60,7 @@ app.get('/product/availables', (req, res) => {
 //getting the detail of one specific product
 app.get('/product/:id', (req, res) => {
     let id = req.params.id;
+
     Product.findById(id)
             .exec((err, result) => {
                 if (err) return res.status(500).json({
@@ -94,7 +96,7 @@ app.get('/product/search/:name', (req, res) => {
                 res.json({
                             products : result
                          });
-            })
+            });
 });
 
 
@@ -108,7 +110,6 @@ app.post('/product',[IsValidToken, isAdmin], (req, res) => {
                                 description : body.description,
                                 price : body.price || 0,
                                 quantity : body.quantity || 0,
-                                //likes : body.likes,
                                 status : 'A'
                             });
 
@@ -151,6 +152,7 @@ app.put('/product/price/:id',[IsValidToken, isAdmin], (req, res) => {
     let id = req.params.id;
     let new_price = req.body.price;
     let old_price = 0;
+    let user_id = req.user._id;
 
     Product.findById(id, (err, result) => {
 
@@ -181,7 +183,7 @@ app.put('/product/price/:id',[IsValidToken, isAdmin], (req, res) => {
                 product: result._id,
                 old_price,
                 new_price,
-                //me falta implementar usuario
+                user : user_id,
                 //date : Date.now,
                 status : 'A'
             });
@@ -229,6 +231,7 @@ app.put('/product/purchase/:id',[IsValidToken], (req, res) => {
     let id = req.params.id;
     let body = _.pick(req.body, ['quantity']);
     let purchase_amount = body.quantity || null;
+    let user_id = req.user._id;
 
     if(purchase_amount ===null)
         res.status(400).json({
@@ -264,7 +267,7 @@ app.put('/product/purchase/:id',[IsValidToken], (req, res) => {
                     let log_purchase = new LogPurchase({
                         product: result._id,
                         amount : purchase_amount,
-                        //me falta implementar usuario
+                        user : user_id,
                         //date : Date.now,
                         status : 'A'
                     });
