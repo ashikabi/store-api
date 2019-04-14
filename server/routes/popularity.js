@@ -1,5 +1,6 @@
 const express = require('express');
 const Popularity = require('../model/popularity');
+let Product = require('../model/product');
 const app = express();
 const { IsValidToken } = require('../controller/authentication');
 
@@ -60,21 +61,35 @@ app.post('/like/:id',[IsValidToken], (req, res)=> {
                                                         });
                     
                     if(result.length===0){
-                        let popularity = new Popularity({
-                            product : id,
-                            user : user_id,
-                            status: 'A'
-                        });
-                        popularity.save((err, like) => {
-
+                        Product.findById(id)
+                        .exec((err, prod) => {
                             if (err) return res.status(500).json({
                                                                     err
                                                                  });
-                    
-                            res.status(201).json({
-                                                   message : "you Liked this product!"
-                                                 });
-                    
+                            
+                            if (!prod || prod.status==='D')
+                                return res.status(400).json({
+                                                            err: {
+                                                                    message: 'Product not exists'
+                                                                }
+                                                        });
+            
+                                let popularity = new Popularity({
+                                    product : id,
+                                    user : user_id,
+                                    status: 'A'
+                                });
+                                popularity.save((err, like) => {
+        
+                                    if (err) return res.status(500).json({
+                                                                            err
+                                                                            });
+                            
+                                    res.status(201).json({
+                                                            message : "you Liked this product!"
+                                                            });
+                            
+                                });
                         });
                     }else
                         return res.status(500).json({

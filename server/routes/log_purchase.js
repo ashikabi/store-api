@@ -6,6 +6,8 @@ app.get('/log/purchase/products', (req, res) => {
 
     logPurchase.find({ status: 'A' })//D : deleted ; A : active
     .sort('product')
+    .populate('product', '_id name description status')
+    .populate('user', '_id name email status')
     .exec((err, result) => {
 
         if (err) return res.status(500).json({
@@ -26,6 +28,8 @@ app.get('/log/purchase/products/:id', (req, res) => {
 
     logPurchase.find({status : 'A', product : id})
                 .sort('product')
+                .populate('product', '_id name description status')
+                .populate('user', '_id name email status')
                 .exec((err, result) => {
                 if (err) return res.status(500).json({
                                                         err

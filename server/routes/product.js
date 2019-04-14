@@ -3,7 +3,6 @@ const _ = require('underscore');
 let Product = require('../model/product');
 let LogPrice = require('../model/log_product_price');
 let LogPurchase = require('../model/log_purchase');
-let Popularity = require('../model/popularity');
 const { IsValidToken, isAdmin } = require('../controller/authentication');
 
 let app = express();
@@ -11,14 +10,15 @@ let app = express();
 //getting the whole list of products using pagination with 5 products per page
 app.get('/products', (req, res) => {
 
-    let from = req.query.from || 0;
+   /* let from = req.query.from || 0;
     from = Number(from);
     let step = req.query.step || 5;
+        step = Number(step);*/
 
 Product.find({ status: 'A' })//D : deleted ; A : active
         .sort('name')
-        .skip(from)
-        .limit(step)
+        //.skip(from)
+        //.limit(step)
         .exec((err, result) => {
 
             if (err) return res.status(500).json({
@@ -39,6 +39,7 @@ app.get('/product/availables', (req, res) => {
     let from = req.query.from || 0;
         from = Number(from);
     let step = req.query.step || 5;
+        step = Number(step);
 
     Product.find({ status: 'A', //D : deleted ; A : active
                    quantity: {$gt: 0} }) // quantity > 0 //those are available

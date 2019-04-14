@@ -1,0 +1,504 @@
+{
+	"info": {
+		"_postman_id": "dbab0e35-594b-40f3-ac41-50b95623259e",
+		"name": "store-api",
+		"description": "this collection provides examples to test the apis ",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Add Product",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\" : \"crackers\",\n    \"description\":\"cookies\",\n    \"price\" : 0.95,\n    \"quantity\" : 12\n}"
+				},
+				"url": {
+					"raw": "localhost:3000/product",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"product"
+					]
+				},
+				"description": "{{token}} : should be changed by a valid token\n\nto get a new token you must need to get login with a valid user,\nonly users with ADMIN_ROLES can perform this action\n\nexample of the body to send:\n{\n    \"name\" : \"crackers\",\n    \"description\":\"cookies\",\n    \"price\" : 0.95,\n    \"quantity\" : 12\n}"
+			},
+			"response": []
+		},
+		{
+			"name": "Remove Product,",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					},
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "localhost:3000/product/5cb295120cec4c0dabf77936",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"product",
+						"5cb295120cec4c0dabf77936"
+					]
+				},
+				"description": "{{id}} : should be changed by a valid product id\n{{token}} : should be changed by a valid token\n\nto get a new token you must need to get login with a valid user\nonly users with ADMIN_ROLES can perform this action"
+			},
+			"response": []
+		},
+		{
+			"name": "Modify the Stock Quantity",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n       \"quantity\" : 11\n}"
+				},
+				"url": {
+					"raw": "localhost:3000/product/stock/{{id}}",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"product",
+						"stock",
+						"{{id}}"
+					]
+				},
+				"description": "{{id}} : should be changed by a valid product id\n\nexample of the body to send:\n{\n       \"quantity\" : 11\n}"
+			},
+			"response": []
+		},
+		{
+			"name": "Modify the price of Products",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n       \"price\" : 0.95\n}"
+				},
+				"url": {
+					"raw": "localhost:3000/product/price/{{id}}",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"product",
+						"price",
+						"{{id}}"
+					]
+				},
+				"description": "{{id}} : should be changed by a valid product id\n{{token}} : should be changed by a valid token\n\nto get a new token you must need to get login with a valid user,\nonly users with ADMIN_ROLES can perform this action\n\nexample for the body to send:\n{\n\t\"quantity\" : 0.95\n}"
+			},
+			"response": []
+		},
+		{
+			"name": "Purchase a Product",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n       \"quantity\" : 6\n}"
+				},
+				"url": {
+					"raw": "localhost:3000/product/purchase/{{id}}",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"product",
+						"purchase",
+						"{{id}}"
+					]
+				},
+				"description": "{{id}} : should be changed by a valid product id\n{{token}} : should be changed by a valid token\n\nto get a new token you must need to get login with a valid user,\nonly logged in users can perform this action\n\nexample of the body to send:\n{\n       \"quantity\" : 6\n}"
+			},
+			"response": []
+		},
+		{
+			"name": "Like a Product",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:3000/like/{{id}}",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"like",
+						"{{id}}"
+					]
+				},
+				"description": "{{id}} : should be changed by a valid product id\n{{token}} : should be changed by a valid token\n\nto get a new token you must need to get login with a valid user,\nonly logged in users can perform this action\n"
+			},
+			"response": []
+		},
+		{
+			"name": "List of Available Products",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:3000/product/availables?from={{from}}&step={{step}}",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"product",
+						"availables"
+					],
+					"query": [
+						{
+							"key": "from",
+							"value": "{{from}}"
+						},
+						{
+							"key": "step",
+							"value": "{{step}}"
+						}
+					]
+				},
+				"description": "List of Available Products.\n{{from}} : is the initial boundary, by default is zero if you don't pass the key-pair value\n{{step}} : is the final boundary, by default is 5 if you don't pass the key-pair value"
+			},
+			"response": []
+		},
+		{
+			"name": "Search Products by Name",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:3000/product/search/{{name}}",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"product",
+						"search",
+						"{{name}}"
+					]
+				},
+				"description": "{{name}} need to be change by a name, it doesn't matter if is just one part of a name."
+			},
+			"response": []
+		},
+		{
+			"name": "Create Users",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\" : \"Ambar Artiga\",\n\t\"email\" : \"Ambar@gmail.com\",\n\t\"password\" : \"qwerty1234\",\n\t\"role\" : \"USER_ROLE\"\n}"
+				},
+				"url": {
+					"raw": "localhost:3000/user",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"user"
+					]
+				},
+				"description": "This is helpful to create a new user and their roles.\nthe Actual Valid Roles are :\nADMIN_ROLE\nUSER_ROLE\n\nthis is an example of how to create a user:\n{\n\t\"name\" : \"Ambar Artiga\",\n\t\"email\" : \"Ambar@gmail.com\",\n\t\"password\" : \"qwerty1234\",\n\t\"role\" : \"USER_ROLE\"\n}"
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "jrartiga001@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "qwerty1234",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:3000/login?email={{email}}&password={{password}}",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"login"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "{{email}}"
+						},
+						{
+							"key": "password",
+							"value": "{{password}}"
+						}
+					]
+				},
+				"description": "login and get a valid token to get access to many apis\n{{email}}: the email need to be change for a valid that exists in the DB \n{{password}} : need to be change for the password that come along with the email as well"
+			},
+			"response": []
+		},
+		{
+			"name": "Listing the whole set of products",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:3000/products",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"products"
+					]
+				},
+				"description": "Login is not required"
+			},
+			"response": []
+		},
+		{
+			"name": "Listing the complete set of Likes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:3000/likes",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"likes"
+					]
+				},
+				"description": "Login is not required"
+			},
+			"response": []
+		},
+		{
+			"name": "Listing the logs of prices",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:3000/log/prices/product",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"log",
+						"prices",
+						"product"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listing the purchases",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:3000/log/purchase/products",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"log",
+						"purchase",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listing the purchases by product",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:3000/log/purchase/products/{{id}}",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"log",
+						"purchase",
+						"products",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listing the Logs Prices by product",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:3000/log/prices/product/{{id}}",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"log",
+						"prices",
+						"product",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
