@@ -7,6 +7,7 @@ In order to run locally this project you must follow the next steps:
 *MongoDB has to be installed in your computer*
 
 1.-clone this repo to your computer
+------------------------------------
 
 2.-get into the project folder :
 ------------------------------------
@@ -21,15 +22,17 @@ In order to run locally this project you must follow the next steps:
 ---------------------------------------
     npm install 
 
-5.-the to run locally execute :
+5.-then to run locally execute :
 -----------------------------------
     node server/server
 
 6.-and there you go, now you can perform request using postman.
+-----------------------------------------------------------------
 
 
 
 **AVAILABLE REQUEST**
+------------------------------------------------------------
 https://www.getpostman.com/collections/22a4d06927919e5d8f8d
 
 1.- Add Product:
