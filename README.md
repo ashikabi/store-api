@@ -33,7 +33,7 @@ In order to run locally this project you must follow the next steps:
 
 **AVAILABLE REQUEST**
 ------------------------------------------------------------
-https://www.getpostman.com/collections/22a4d06927919e5d8f8d
+https://documenter.getpostman.com/view/4649025/S1ENzed2
 
 1.- Add Product:
 -------------------------------------------
